@@ -111,10 +111,14 @@
 #     return triplets
 
 
-def three_sum(nums):
+def three_sum(nums, target):
     nums.sort()  # Ensure the array is sorted
     result = []
     n = len(nums)
+    
+    # nums = [-1,0,1,2,-1,-4]  - [-1, -1, 0, 1, 2, 4]. n = 6
+    # 0,1, 2, 3
+    
     
     for i in range(n - 2):  # Loop through the array, leaving space for at least two more elements
         # Skip duplicate elements for the first element of the triplet
@@ -126,7 +130,7 @@ def three_sum(nums):
         while left < right:
             current_sum = nums[i] + nums[left] + nums[right]
             
-            if current_sum == 0:
+            if current_sum == target:
                 result.append([nums[i], nums[left], nums[right]])
                 
                 # Move the left and right pointers to avoid duplicates
@@ -138,7 +142,7 @@ def three_sum(nums):
                 left += 1
                 right -= 1
                 
-            elif current_sum < 0:
+            elif current_sum < target:
                 left += 1  # We need a larger sum
             else:
                 right -= 1  # We need a smaller sum
@@ -146,6 +150,6 @@ def three_sum(nums):
     return result
 
 nums = [-1,0,1,2,-1,-4]
-print(three_sum(nums))
+print(three_sum(nums, 1))
 nums = [0,0,0,0]
-print(three_sum(nums))
+print(three_sum(nums, 1))
